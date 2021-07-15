@@ -1,4 +1,4 @@
-module base62
+module github.com/jmrtt/base62
 
 go 1.16
 
