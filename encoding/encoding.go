@@ -4,6 +4,7 @@ const StandardBase int = 256
 
 const TargetBase int = 62
 
+// Alphabet used for encoding/decoding
 var alphabet []byte = []byte{
 	'0', '1', '2', '3', '4', '5', '6', '7',
 	'8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
@@ -15,14 +16,17 @@ var alphabet []byte = []byte{
 	'u', 'v', 'w', 'x', 'y', 'z',
 }
 
+// Fill lookup table for encoding/decoding process
 var lookup = createLookupTable()
 
+// Encode will encode the given byte array in Base62
 func Encode(message []byte) []byte {
 	indices := convert(message, StandardBase, TargetBase)
 
 	return translate(indices, alphabet)
 }
 
+// Decode will decode the given byte array in Base62
 func Decode(encoded []byte) []byte {
 	if !isBase62Encoding(encoded) {
 		panic("invalid encoded byte array")
@@ -33,6 +37,7 @@ func Decode(encoded []byte) []byte {
 	return convert(prepared, TargetBase, StandardBase)
 }
 
+// Performs the conversion of a byte array from a source base to a target base
 func convert(message []byte, sourceBase int, targetBase int) []byte {
 	var out []byte
 
@@ -61,12 +66,14 @@ func convert(message []byte, sourceBase int, targetBase int) []byte {
 	return out
 }
 
+// Reverse given byte array
 func reverse(arr []byte) {
 	for i, j := 0, len(arr)-1; i < j; i, j = i+1, j-1 {
 		arr[i], arr[j] = arr[j], arr[i]
 	}
 }
 
+// Translate byte array given a dictionary, in this case will be the lookup table
 func translate(indices []byte, dictionary []byte) []byte {
 	translation := make([]byte, len(indices))
 
@@ -77,6 +84,7 @@ func translate(indices []byte, dictionary []byte) []byte {
 	return translation
 }
 
+// Create a lookup table for the defined alphabet
 func createLookupTable() []byte {
 	lookup := make([]byte, 256)
 
@@ -87,6 +95,7 @@ func createLookupTable() []byte {
 	return lookup
 }
 
+// isBase62Encoding will check if bytes are encoded using Base62
 func isBase62Encoding(bytes []byte) bool {
 	if len(bytes) == 0 {
 		return false
