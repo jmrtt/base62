@@ -1,11 +1,11 @@
 package cmd
 
 import (
-	"base62/encoding"
 	"bufio"
 	"fmt"
 	"os"
 
+	"github.com/jmrtt/base62/encoding"
 	"github.com/spf13/cobra"
 )
 
@@ -25,12 +25,20 @@ var decodeCmd = &cobra.Command{
 			if scanner.Err() != nil {
 				fmt.Println("Error: ", scanner.Err())
 			}
-			data := encoding.Decode([]byte(text))
+			data, err := encoding.Decode([]byte(text))
+			if err != nil {
+				fmt.Printf("Error: %s", err)
+				return
+			}
 			fmt.Println(string(data))
 			return
 		}
 
-		data := encoding.Decode([]byte(args[0]))
+		data, err := encoding.Decode([]byte(args[0]))
+		if err != nil {
+			fmt.Printf("Error: %s", err)
+			return
+		}
 		fmt.Println(string(data))
 	},
 }

@@ -1,5 +1,7 @@
 package encoding
 
+import "fmt"
+
 const StandardBase int = 256
 
 const TargetBase int = 62
@@ -27,14 +29,14 @@ func Encode(message []byte) []byte {
 }
 
 // Decode will decode the given byte array in Base62
-func Decode(encoded []byte) []byte {
+func Decode(encoded []byte) (decoded []byte, err error) {
 	if !isBase62Encoding(encoded) {
-		panic("invalid encoded byte array")
+		return nil, fmt.Errorf("invalid encoded byte array")
 	}
 
 	prepared := translate(encoded, lookup)
 
-	return convert(prepared, TargetBase, StandardBase)
+	return convert(prepared, TargetBase, StandardBase), nil
 }
 
 // Performs the conversion of a byte array from a source base to a target base

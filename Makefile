@@ -16,15 +16,15 @@ test: ## Run tests for the application
 
 .PHONY: build-linux
 build-linux: ## Build application for linux
-	GOOS=linux GOARCH=amd64 go build -o bin/ip-usage-checker-linux -a ./cmd
+	GOOS=linux GOARCH=amd64 go build -o bin/base62-linux
 
 .PHONY: build-darwin
 build-darwin: ## Build application for macos
-	GOOS=darwin GOARCH=amd64 go build -o bin/ip-usage-checker-darwin -a ./cmd
+	GOOS=darwin GOARCH=amd64 go build -o bin/base62-darwin
 
 .PHONY: build-windows
 build-windows: ## Build application for windows
-	GOOS=windows GOARCH=amd64 go build -o bin/ip-usage-checker-windows.exe -a ./cmd
+	GOOS=windows GOARCH=amd64 go build -o bin/base62-windows.exe
 
 .PHONY: build
 build: ## Build for all platforms

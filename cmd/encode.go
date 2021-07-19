@@ -1,12 +1,12 @@
 package cmd
 
 import (
-	"base62/encoding"
 	"bufio"
 	"fmt"
 	"os"
 	"strings"
 
+	"github.com/jmrtt/base62/encoding"
 	"github.com/spf13/cobra"
 )
 

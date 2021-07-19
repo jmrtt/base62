@@ -1,7 +1,7 @@
 package main
 
 import (
-	"base62/cmd"
+	"github.com/jmrtt/base62/cmd"
 )
 
 func main() {
